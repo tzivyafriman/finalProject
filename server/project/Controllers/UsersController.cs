@@ -25,9 +25,9 @@ namespace project.Controllers
 
         //myFoodContext context = new myFoodContext();
         [HttpGet]
-        public List<string> ppppppGetAllUsers()
+        public List<string> GetAllUsers()
         {
-            return UserService.ppppppGetAllUsers();
+            return UserService.GetAllUsers();
         }
         //public List<string> GetAllUsers()=> context.Users.Select(u => u.FirstName).ToList();
 

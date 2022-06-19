@@ -8,7 +8,7 @@ namespace project.Interfaces
 {
     public interface IUserservice
     {
-        List<string> ppppppGetAllUsers();
+        List<string> GetAllUsers();
         void addUser(UserDto u1);
         List<string> GetAllCategories();
     }
