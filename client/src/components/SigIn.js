@@ -14,6 +14,7 @@ const SigIn = () => {
     //צריך את זה?
     // למה לא?
     // למה אתה לא עובד?????
+    // tfyguj
     useEffect(() => {
         console.log(user.FirstName);
     }, [user]);
