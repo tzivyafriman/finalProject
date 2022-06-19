@@ -24,6 +24,7 @@ namespace project.Controllers
         List<string> l;
 
         //myFoodContext context = new myFoodContext();
+        //החזרת רשימת משתמשים
         [HttpGet]
         public List<string> GetAllUsers()
         {
