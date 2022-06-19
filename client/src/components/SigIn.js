@@ -12,6 +12,7 @@ const SigIn = () => {
         PasswordUser: 0,
     });
     //צריך את זה?
+    // למה לא?
     useEffect(() => {
         console.log(user.FirstName);
     }, [user]);
