@@ -13,6 +13,7 @@ const SigIn = () => {
     });
     //צריך את זה?
     // למה לא?
+    // למה אתה לא עובד?????
     useEffect(() => {
         console.log(user.FirstName);
     }, [user]);
