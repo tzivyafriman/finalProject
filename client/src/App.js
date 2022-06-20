@@ -7,8 +7,6 @@ import { detailsFoodProvider } from './context/detailsFood';
 import SigIn from './components/SigIn';
 import axios from 'axios';
 
-
-
 // import { Books } from './components/Books';
 // import { Book } from './components/Book';
 // import { Setting } from './components/Setting';
@@ -32,7 +30,6 @@ import axios from 'axios';
 
 function App() {
   return (
-
     //   <div className="App">
     //     <menu>
     //       <ul>
@@ -41,6 +38,7 @@ function App() {
     //     </menu>
 
     //     <div>
+    //try git in client
     <detailsFoodProvider>
       <Routes>
           <Route exact path="/" element={<ShowFood />} />
