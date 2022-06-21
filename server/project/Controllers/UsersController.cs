@@ -25,7 +25,6 @@ namespace project.Controllers
 
         //myFoodContext context = new myFoodContext();
         //החזרת רשימת משתמשים
-        //איזה מגניב!!
         [HttpGet]
         public List<string> GetAllUsers()
         {

@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import React, { useEffect } from "react";
-import { url } from '../data/url';
+import { urlUsers } from '../data/url';
+const url= urlUsers;
 
-const SigIn = () => {
+const SignUp = () => {
 
     const [user, setUser] = useState({
         IdUser: 0,
@@ -20,7 +21,7 @@ const SigIn = () => {
     }, [user]);
 
     // קבלת רשימת משתמשים
-    const signIn = () => {
+    const signUp = () => {
         // GET request using axios with error handling
         axios.get(url)
             .then(response => {
@@ -53,14 +54,16 @@ const SigIn = () => {
 
     return (
         <div>
+            <b>SignIn </b><br></br>
             <b>welcome! enter your details: </b><br></br>
             <input name="FirstName" onChange={(e) => handleChange(e)} type="text" placeholder="firs name"></input><br></br>
             <input name="LastName" onChange={(e) => handleChange(e)} type="text" placeholder="last name"></input><br></br>
             <input name="PasswordUser" onChange={(e) => handleChange(e)} type="password" placeholder="password"></input><br></br>
             <input id="password2" type="password" placeholder="your password again"></input><br></br>
             <button onClick={addUser}>save</button>
-            <button onClick={signIn}>Sign In</button>
+            {/* קבלת רשימת משתמשים */}
+            <button onClick={signUp}>Sign up</button>
         </div>
     )
 }
-export default SigIn;
+export default SignUp;
