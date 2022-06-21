@@ -23,7 +23,7 @@ const SignUp = () => {
     // קבלת רשימת משתמשים
     const signUp = () => {
         // GET request using axios with error handling
-        axios.get(urlUsers)
+        axios.get(url)
             .then(response => {
                 console.log(response.data);
             })
@@ -34,7 +34,7 @@ const SignUp = () => {
 
     //הוספת משתמש חדש למערכת
     const addUser = () => {
-        axios.post(urlUsers + '/addUser',user)
+        axios.post(url + '/addUser',user)
             .then((res) => {
                 console.log(res)
             })
