@@ -28,7 +28,7 @@ const SignIn = () => {
         console.log(user.FirstName);
     }, [user]);
 
-    // קבלת רשימת משתמשים
+     // בדיקה האם המשתמש קיים
     const signIn = () => {
         // GET request using axios with error handling
         axios.get(url+ '/login',user)
@@ -36,6 +36,8 @@ const SignIn = () => {
                 if(response == true){
                     currentUser = response.data;
                 }else{
+                    // { <SignUp />}
+                    // console.log(response.data);
                    <SignUp/> 
                 }
             })
@@ -43,7 +45,6 @@ const SignIn = () => {
                 console.error('There was an error!', error);
             });
     }
-
     //מעדכנת את stateUser  מה form 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -55,15 +56,12 @@ const SignIn = () => {
 
     return (
         <div>
-            <b>SignIn </b><br></br>
-            <b>welcome! enter your details: </b><br></br>
+           <b>SignIn </b><br></br>
+            <b>welcome! enter your name and password: </b><br></br>
             <input name="FirstName" onChange={(e) => handleChange(e)} type="text" placeholder="firs name"></input><br></br>
             <input name="LastName" onChange={(e) => handleChange(e)} type="text" placeholder="last name"></input><br></br>
             <input name="PasswordUser" onChange={(e) => handleChange(e)} type="password" placeholder="password"></input><br></br>
-            <input id="password2" type="password" placeholder="your password again"></input><br></br>
-            {/* <button onClick={addUser}>save</button> */}
-            {/* קבלת רשימת משתמשים */}
-            <button onClick={signIn}>Sign in</button>
+            <button onClick={signIn}>Sign In</button>
         </div>
     )
 }
