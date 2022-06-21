@@ -4,7 +4,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import { ShowFood } from './components/ShowFood';
 import AboutFood from './components/AboutFood';
 import { detailsFoodProvider } from './context/detailsFood';
-import SigIn from './components/SigIn';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 import axios from 'axios';
 
 // import { Books } from './components/Books';
@@ -38,12 +39,14 @@ function App() {
     //     </menu>
 
     //     <div>
+    
     //try git in client
     <detailsFoodProvider>
       <Routes>
           <Route exact path="/" element={<ShowFood />} />
           <Route path="/aboutFood" element={<AboutFood />} />
-          <Route exact path="/sigIn" element={<SigIn />} />
+          <Route exact path="/SignUp" element={<SignUp />} />
+          <Route exact path="/SignIn" element={<SignIn />} />
       </Routes>
    </detailsFoodProvider>
     //     </div>

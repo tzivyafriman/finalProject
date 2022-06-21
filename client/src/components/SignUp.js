@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import React, { useEffect } from "react";
-import { url } from '../data/url';
-
-const SigIn = () => {
+import { urlUsers } from '../data/url';
+// urlUsers = {urlUsers}+'users';
+const SignUp = () => {
 
     const [user, setUser] = useState({
         IdUser: 0,
@@ -19,7 +19,7 @@ const SigIn = () => {
     // קבלת רשימת משתמשים
     const signIn = () => {
         // GET request using axios with error handling
-        axios.get(url)
+        axios.get(urlUsers)
             .then(response => {
                 console.log(response.data);
             })
@@ -30,7 +30,7 @@ const SigIn = () => {
 
     //הוספת משתמש חדש למערכת
     const addUser = () => {
-        axios.post(url + '/addUser',user)
+        axios.post(urlUsers + '/addUser',user)
             .then((res) => {
                 console.log(res)
             })
@@ -60,4 +60,4 @@ const SigIn = () => {
         </div>
     )
 }
-export default SigIn;
+export default SignUp;
