@@ -9,7 +9,9 @@ namespace project.Interfaces
     public interface IUserservice
     {
         List<string> GetAllUsers();
-        void addUser(UserDto u1);
+        int Login(UserDto u1);
+        void AddUser(UserDto u1);
         List<string> GetAllCategories();
+
     }
 }

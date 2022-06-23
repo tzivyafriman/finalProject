@@ -34,9 +34,17 @@ namespace project.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public void addUser(UserDto u1)
+        public int Login(UserDto u1)
         {
-            UserService.addUser(u1);
+            return UserService.Login(u1);
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public void AddUser(UserDto u1)
+        {
+            UserService.AddUser(u1);
+
             //User u = _mapper.Map<UserDto,User>(u1);
             //context.Users.Add(u);
             //context.SaveChanges();
@@ -73,7 +81,7 @@ namespace project.Controllers
 
         }
         [HttpPost]
-        public void addUser(int idUser, string firstName, string lastName, int password)
+        public void AddUser(int idUser, string firstName, string lastName, int password)
         {
             User u = new User(idUser,firstName,lastName,password);
             context.Users.Add(u);

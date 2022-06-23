@@ -31,7 +31,7 @@ const SignIn = () => {
      // בדיקה האם המשתמש קיים
     const signIn = () => {
         // GET request using axios with error handling
-        axios.get(url+ '/login',user)
+        axios.get(url+ '/Login',user)
             .then(response => {
                 if(response == true){
                     currentUser = response.data;
