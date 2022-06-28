@@ -43,7 +43,7 @@ namespace project.Services
             _context.Users.Add(u);
             _context.SaveChanges();
         }
-        public List<string> GetAllCategories() => _context.Categories.Select(c => c.CategoryName).ToList();
+       
       
     }
 }

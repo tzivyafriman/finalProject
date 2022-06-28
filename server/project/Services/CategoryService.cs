@@ -28,5 +28,6 @@ namespace project.Services
 
             return lc;
         }
+        public List<string> GetAllCategoriesNames() => _context.Categories.Select(c => c.CategoryName).ToList();
     }
 }

@@ -11,7 +11,7 @@ namespace project.Interfaces
         List<string> GetAllUsers();
         int Login(UserDto u1);
         void AddUser(UserDto u1);
-        List<string> GetAllCategories();
+        
 
     }
 }

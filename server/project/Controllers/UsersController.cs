@@ -49,9 +49,7 @@ namespace project.Controllers
             //context.Users.Add(u);
             //context.SaveChanges();
         }
-        [HttpGet]
-        [Route("[action]")]
-        public List<string> GetAllCategories() => UserService.GetAllCategories();
+        
         //public List<string> GetAllCategories() => context.Categories.Select(c => c.CategoryName).ToList();
        
         /*public void update()

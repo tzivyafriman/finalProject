@@ -21,48 +21,74 @@ namespace project.Controllers
         myFoodContext context = new myFoodContext();
 
         [HttpGet]
-        //[Route("[action]")]
-        public List<MealDto> GetAllMeals()
+        [Route("[action]")]
+        public List<MealDTO> GetAllMeals()
         {
             var meals = context.Meals.ToList();
             foreach (var m in meals)
             {
                 context.Entry(m).Collection(t => t.MealCategories).Load();
-
             }
-            return _mapper.Map<List<Meal>,List<MealDto>>(meals);
+            return _mapper.Map<List<Meal>, List<MealDTO>>(meals);
         }
-
-        //[HttpGet]
-        //public List<MealDto> GetAllMeals() =>(List<MealDto>)context.Meals.ToList();
-
-        //[HttpGet("{id}")]
-        //[Route("[action]")]
-        //public Meal getMealById(int id)
+        //public string GetIdReturnName(int idCategory)
         //{
-        //    return context.Meals.First(m => m.IdMeal == id);
+        //    return context.Categories.Find(idCategory).CategoryName;
         //}
+    //    foreach (var m in GetAllMeals())
+//        {
+//            List<string> l;
+//            foreach (var c in m.CategoryListId)
+//            {
+//                l.Add(GetIdReturnName(c));
+//            }
+//            m.CategoryListName = l;
+//        }
+
+
+
+
+//[HttpGet]
+//public List<MealDTO> GetAllMeals() =>(List<MealDTO>)context.Meals.ToList();
+
+//[HttpGet("{id}")]
+//[Route("[action]")]
+//public Meal getMealById(int id)
+//{
+//    return context.Meals.First(m => m.IdMeal == id);
+//}
 
         [HttpPost]
         [Route("[action]")]
-        public void addMeal(MealDto m1)
+        public void addMeal(MealDTO m1)
         {
-            Meal m = _mapper.Map<MealDto, Meal>(m1);
-            //m.MealName = m1.MealName;
+            Meal m = _mapper.Map<MealDTO, Meal>(m1);
             context.Meals.Add(m);
             context.SaveChanges();
-            //אם מה שהתקנו היה אמור לחסוך את זה
-            foreach (var c in m1.CategoryListId)
+        }
+        [HttpPost]
+        [Route("[action]")]
+        public bool cheekMealName(string mealName)
+        {
+            foreach (Meal m in context.Meals)
             {
-                MealCategory m2 = new MealCategory();
-                m2.IdMeal = m.IdMeal;
-                m2.Idcategory = c;
-                context.MealCategories.Add(m2);
-                // נראה שעובד , אז למה היה פה דיבוג?????
-                context.Meals.FirstOrDefault(m3 => m3.IdMeal == m2.IdMeal).MealCategories.Add(m2);
+                if (m.MealName.Equals(mealName))
+                    return true;
             }
-            context.SaveChanges();
+            return false;
         }
 
+
+        //addmeal- נראה לנו שאפשר לותר
+        //אם מה שהתקנו היה אמור לחסוך את זה
+        //foreach (var c in m1.CategoryListId)
+        //{
+        //    MealCategory m2 = new MealCategory();
+        //    m2.IdMeal = m.IdMeal;
+        //    m2.Idcategory = c;
+        //    context.MealCategories.Add(m2);
+        //    // נראה שעובד , אז למה היה פה דיבוג?????
+        //    context.Meals.FirstOrDefault(m3 => m3.IdMeal == m2.IdMeal).MealCategories.Add(m2);
+        //}
     }
 }

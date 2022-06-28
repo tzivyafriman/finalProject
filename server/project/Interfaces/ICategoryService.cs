@@ -10,5 +10,6 @@ namespace project.Interfaces
     public interface ICategoryService
     {
         List<CategoryDTO> GetAllCategories();
+        List<string> GetAllCategoriesNames();
     }
 }
