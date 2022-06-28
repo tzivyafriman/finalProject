@@ -22,7 +22,7 @@ namespace project.Services
         List<string> l;
         public List<string> GetAllUsers()=> _context.Users.Select(u => u.FirstName).ToList();
 
-        int Login(UserDto u1)
+        public int Login(UserDto u1)
         {
             foreach(User u in _context.Users.ToList())
             {
@@ -44,5 +44,6 @@ namespace project.Services
             _context.SaveChanges();
         }
         public List<string> GetAllCategories() => _context.Categories.Select(c => c.CategoryName).ToList();
+      
     }
 }

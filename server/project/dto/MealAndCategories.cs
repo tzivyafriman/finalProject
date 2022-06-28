@@ -11,7 +11,6 @@ namespace project.dto
         public int idMeal { get; set; }
         String name;
         
-        List<>
     }
 }
 

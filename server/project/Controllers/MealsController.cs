@@ -52,7 +52,7 @@ namespace project.Controllers
             context.Meals.Add(m);
             context.SaveChanges();
             //אם מה שהתקנו היה אמור לחסוך את זה
-            foreach (var c in m1.CategoryList)
+            foreach (var c in m1.CategoryListId)
             {
                 MealCategory m2 = new MealCategory();
                 m2.IdMeal = m.IdMeal;
