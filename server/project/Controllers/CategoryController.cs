@@ -21,8 +21,14 @@ namespace project.Controllers
         {
             this.CategoryServices = CategoryServices2;
         }
+        //שמות וקוד ארוחות
         [HttpGet]
         [Route("[action]")]
         public List<CategoryDTO> GetAllCategories() => CategoryServices.GetAllCategories();
+        //קבלת שמות ארוחות
+        [HttpGet]
+        [Route("[action]")]
+        public List<string> GetAllCategoriesNames() => CategoryServices.GetAllCategoriesNames();
+        
     }
 }
