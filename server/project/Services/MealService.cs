@@ -11,6 +11,7 @@ namespace project.Services
     public class MealService: IMealService
     {
         private readonly IMapper _mapper;
+        private  int x;
         myFoodContext _context;
         public MealService(IMapper mapper, myFoodContext context)
         {
@@ -24,6 +25,7 @@ namespace project.Services
             //פונ' שהיתה טובה לפני שהחלפנו את מבנה 
             //mealDTO
             //לברר איך בדיוק נכון לכתוב אותו ומה לשנות
+           
             var meals = _context.Meals.ToList();
             foreach (var m in meals)
             {
