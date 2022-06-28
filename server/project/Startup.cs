@@ -51,8 +51,9 @@ namespace project
             services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<myFoodContext>(o => o.UseSqlServer(Configuration.GetConnectionString("myFoodContext")));
             services.AddControllersWithViews();
-            services.AddScoped(typeof(IUserservice),typeof( UserService));
+            services.AddScoped(typeof(IUserservice), typeof(UserService));
             services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+            services.AddScoped(typeof(IMealService), typeof(MealService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

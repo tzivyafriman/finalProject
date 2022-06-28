@@ -14,6 +14,7 @@ namespace project.dto
             CreateMap <User, UserDto>(); 
             CreateMap<UserDto, User>();
             CreateMap<MealDTO, Meal>();
+            CreateMap<Meal, MealDTO>();
             CreateMap<MealCategoryDTO, MealCategory>();
             //CreateMap<MealDTO, Meal>().ForMember(dest=>dest.MealCategories, src => src.MapFrom(o => o.CategoryListId));
             //CreateMap<Meal, MealDTO>().ForMember(dest => dest.CategoryListId,src=>src.MapFrom(o=>o.MealCategories.Select(c=>c.Idcategory)));

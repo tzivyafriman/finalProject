@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using project.Interfaces;
 
 namespace project.Controllers
 {
@@ -12,24 +13,17 @@ namespace project.Controllers
     [Route("[controller]")]
     public class MealsController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        public MealsController(IMapper mapper)
+        private IMealService MealService;
+        public MealsController(IMealService MealService2)
         {
-            _mapper = mapper;
+            this.MealService = MealService2;
         }
-
-        myFoodContext context = new myFoodContext();
 
         [HttpGet]
         [Route("[action]")]
         public List<MealDTO> GetAllMeals()
         {
-            var meals = context.Meals.ToList();
-            foreach (var m in meals)
-            {
-                context.Entry(m).Collection(t => t.MealCategories).Load();
-            }
-            return _mapper.Map<List<Meal>, List<MealDTO>>(meals);
+            return MealService.GetAllMeals();
         }
         //public string GetIdReturnName(int idCategory)
         //{
@@ -62,20 +56,13 @@ namespace project.Controllers
         [Route("[action]")]
         public void addMeal(MealDTO m1)
         {
-            Meal m = _mapper.Map<MealDTO, Meal>(m1);
-            context.Meals.Add(m);
-            context.SaveChanges();
+            MealService.AddMeal(m1);
         }
         [HttpPost]
         [Route("[action]")]
         public bool cheekMealName(string mealName)
         {
-            foreach (Meal m in context.Meals)
-            {
-                if (m.MealName.Equals(mealName))
-                    return true;
-            }
-            return false;
+            return MealService.CheekMealName(mealName);
         }
 
 
