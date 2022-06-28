@@ -15,14 +15,14 @@ namespace project.dto
             CreateMap<UserDto, User>();
             CreateMap<MealDto, Meal>();
             CreateMap<Meal, MealDto>().ForMember(dest => dest.CategoryListId,src=>src.MapFrom(o=>o.MealCategories.Select(c=>c.Idcategory)));
-
+            CreateMap<Category, CategoryDTO>();
             //foreach (var cli in CategoryListId)
             //{
 
             //}
             //CreateMap<(Meal, Category), MealDto >().ForMember(dest => dest.Categories, src => src .MapFrom(o => o.Item2.CategoryName.Select(c => c.)));
             //CreateMap<(MealDto, Category), MealDto>().ForMember(dest => dest.CategoryListName, src => src.MapFrom(o => o.Item2.IdCategory.se   .Item1.CategoryListId.ForEach(ci=>ci == o.Item2.IdCategory);
-            
+
             ///CreateMap<Category, MealDto>().ForMember(dest => dest.CategoryListName, src => src.MapFrom(o => o.MealCategories.Select(c => c.IdMeal)));
             //CreateMap<(MealDto, Category), MealDto>()
             //    .ForMember(

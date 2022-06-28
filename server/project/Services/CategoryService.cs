@@ -1,4 +1,5 @@
 ﻿using project.dto;
+using AutoMapper;
 using project.Interfaces;
 using project.Models;
 using System;
@@ -10,9 +11,11 @@ namespace project.Services
 {
     public class CategoryService: ICategoryService
     {
+        private readonly IMapper _mapper;
         myFoodContext _context;
-        public CategoryService(myFoodContext context)
+        public CategoryService(IMapper mapper, myFoodContext context)
         {
+            _mapper = mapper;
             _context = context;
         }
         public List<CategoryDTO> GetAllCategories()
@@ -20,11 +23,9 @@ namespace project.Services
             List<CategoryDTO> lc = new List<CategoryDTO>();
             foreach (var c in _context.Categories)
             {
-                CategoryDTO c1 = new CategoryDTO();
-                c1.CategoryName = c.CategoryName;
-                c1.IdCategory = c.IdCategory;
-                lc.Add(c1);
+                lc.Add(_mapper.Map<Category, CategoryDTO>(c));
             }
+
             return lc;
         }
     }
