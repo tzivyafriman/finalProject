@@ -87,7 +87,7 @@ const SignIn = () => {
         <head>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
         </head>
-        <Form id="center">
+            <Form id="center">
             <Form.Group className="mb-3" /*controlId="formBasicEmail"*/>
             <Form.Control name="FirstName" type="text" placeholder="firstName" onChange={(e) => handleChange(e)}/>
                 <Form.Text className="text-muted">
@@ -97,11 +97,14 @@ const SignIn = () => {
             <Form.Group className="mb-3" /*controlId="formBasicEmail"*/>
                 <Form.Control name="LastName" type="text" placeholder="lastName" onChange={(e) => handleChange(e)}/>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control id="PasswordUser" name="PasswordUser" type={passwordType} /*value={user.PasswordUser}*/ placeholder="Password" onChange={(e) => handleChange(e)} class="form-control"/>
-                <Button /*className="btn btn-outline-primary"*/  onClick={(e) => togglePassword(e)}>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                
+                <div class="col-11">
+                    <Form.Control  id="PasswordUser" name="PasswordUser" type={passwordType} /*value={user.PasswordUser}*/ placeholder="Password" onChange={(e) => handleChange(e)} class="form-control-plaintex"/>
+                    </div>
+                        <Button /*className="btn btn-outline-primary"*/ onClick={(e) => togglePassword(e)}>
                     { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
-                </Button>
+                        </Button>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check /*onClick={()=>}*/ type="checkbox" label="show password" />
