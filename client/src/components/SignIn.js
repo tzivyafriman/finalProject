@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route, Link, Navigate  } from 'react-router-dom';
 import axios from "axios";
 import { useState } from "react";
 import React, { useEffect } from "react";
@@ -7,6 +8,7 @@ import { urlUsers } from '../data/url';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+// import Link from 'react-bootstrap/Link';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { formatDiagnostic } from "typescript";
@@ -62,7 +64,8 @@ const SignIn = () => {
                 }else{
                     console.log("i else");
                     // { <SignUp />}
-                   <SignUp/> 
+                  
+                   {<SignUp/>} 
                 }
             })
             .catch(error => {
@@ -109,9 +112,13 @@ const SignIn = () => {
                 Forget passwore
                 </Form.Text>
             </Form.Group>
+            <Form.Group>
+                <Form.Text>your name or your password</Form.Text>
+            </Form.Group>
             <Button onClick={(e) => signInFunc(e)} /*type="submit" label="Submit"/* onClick={()=>signInFunc()}*/>
                 sign-in
-            </Button>
+            </Button> 
+            <Link to={"/signUp/"} id="linkTo">{'sign-up'} </Link>
         </Form>
 </>
 
