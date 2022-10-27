@@ -7,3 +7,10 @@ width: 40px;
 height: 80px;
 
 }
+
+#center{
+  align-items: center;
+  padding-left: 25%;
+  padding-right: 25%;
+  padding-top: 5%;
+}

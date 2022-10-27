@@ -11,7 +11,6 @@ namespace project.Services
     public class MealService: IMealService
     {
         private readonly IMapper _mapper;
-        private  int x;
         myFoodContext _context;
         public MealService(IMapper mapper, myFoodContext context)
         {
