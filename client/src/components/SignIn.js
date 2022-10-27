@@ -27,11 +27,20 @@ const SignIn = () => {
         // Name: "",
         FirstName: "",
         LastName: "",
-        PasswordUser: 0,
+        PasswordUser: "",
     });
 
-    const [passwordVisible, setPasswordVisible]= useState(false);
-    const elem = document.getElementById('PasswordUser');
+    const [passwordType, setPasswordType] = useState("password");
+
+    const togglePassword = () =>
+    {
+      if(passwordType==="password")
+      {
+       setPasswordType("text");
+       return;
+      }
+      setPasswordType("password");
+    }
     //צריך את זה?
     // למה לא?
     // למה אתה לא עובד?????
@@ -69,27 +78,12 @@ const SignIn = () => {
             setUser(us);
         // console.log('firstName: '+user.FirstName+' lastName: '+user.LastName+' password: '+user.PasswordUser);
     };
-    const handlePasswordVisible = () =>
-    {
-        let text=user.PasswordUser;
-        console.log('text', text);
-        setPasswordVisible(!passwordVisible);
-        console.log('visible', setPasswordVisible);
-        if(passwordVisible)
-        {
-            elem.value = text;
-            //This is required as wihtout it there is a bug that duplicated the first entry if someone decides to show the password
-            elem.value = elem.value.substring(0, text.length - 1)
-            console.log(`Text When Password = Visible: ${text}`)
-        }else
-        {
-            elem.value = "*".repeat(text.length - 1)
-            console.log(`Text When Password = Hidden: ${text}`)
-        }
-    }
 
     return (
         <>
+        <head>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+        </head>
         <Form id="center">
             <Form.Group className="mb-3" /*controlId="formBasicEmail"*/>
             <Form.Control name="FirstName" type="text" placeholder="firstName" onChange={(e) => handleChange(e)}/>
@@ -101,10 +95,13 @@ const SignIn = () => {
                 <Form.Control name="LastName" type="text" placeholder="lastName" onChange={(e) => handleChange(e)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control id="PasswordUser" name="PasswordUser" type="text" placeholder="Password" onChange={(e) => handleChange(e)}/>
+                <Form.Control id="PasswordUser" name="PasswordUser" type={passwordType} /*value={user.PasswordUser}*/ placeholder="Password" onChange={(e) => handleChange(e)} class="form-control"/>
+                <Button /*className="btn btn-outline-primary"*/  onClick={(e) => togglePassword(e)}>
+                    { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
+                </Button>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check onClick={()=>handlePasswordVisible} type="checkbox" label="show password" />
+                <Form.Check /*onClick={()=>}*/ type="checkbox" label="show password" />
             </Form.Group>
             <Form.Group>
                 {/* <Form.call func= "" label="Forget passwore" /> */}
