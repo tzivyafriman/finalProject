@@ -43,7 +43,5 @@ namespace project.Services
             _context.Users.Add(u);
             _context.SaveChanges();
         }
-       
-      
     }
 }

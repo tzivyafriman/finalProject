@@ -47,6 +47,7 @@ function App() {
           <Route path="/aboutFood" element={<AboutFood />} />
           <Route exact path="/SignUp" element={<SignUp />} />
           <Route exact path="/SignIn" element={<SignIn />} />
+          {/* <Route exact path="/home" element={<Home />} /> */}
       </Routes>
    </detailsFoodProvider>
     //     </div>
