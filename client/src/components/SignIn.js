@@ -4,15 +4,18 @@ import { useState } from "react";
 import React, { useEffect } from "react";
 import SignUp from './SignUp'
 import { urlUsers } from '../data/url';
-
+import ReactDOM from 'react-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react'; 
 // import Link from 'react-bootstrap/Link';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { formatDiagnostic } from "typescript";
-
+import { ShowFood } from './ShowFood';
+import { AboutFood } from './AboutFood';
 const url= urlUsers;
 
 const SignIn = () => {
@@ -34,6 +37,9 @@ const SignIn = () => {
 
     const [passwordType, setPasswordType] = useState("password");
 
+    const [inCorrectDetails, setInCorrectDetails] = useState(false);
+
+    
     const togglePassword = () =>
     {
       if(passwordType==="password")
@@ -60,12 +66,11 @@ const SignIn = () => {
                 if(response.data == true){
                     console.log('i recognize!');
                     currentUser = response.data;
+                    // <Redirect to="/signUp" />
                     
                 }else{
                     console.log("i else");
-                    // { <SignUp />}
-                  
-                   {<SignUp/>} 
+                    setInCorrectDetails(true);
                 }
             })
             .catch(error => {
@@ -106,9 +111,9 @@ const SignIn = () => {
                     { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
                         </Button>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check /*onClick={()=>}*/ type="checkbox" label="show password" />
-            </Form.Group>
+            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="show password" />
+            </Form.Group> */}
             <Form.Group>
                 {/* <Form.call func= "" label="Forget passwore" /> */}
                 <Form.Text className="text-muted">
@@ -116,12 +121,17 @@ const SignIn = () => {
                 </Form.Text>
             </Form.Group>
             <Form.Group>
-                <Form.Text>your name or your password</Form.Text>
+                {
+                    inCorrectDetails?<Form.Text id="inCorrect">your name or your password in correct! try again</Form.Text>:
+                    <Form.Text> </Form.Text>
+                }
             </Form.Group>
             <Button onClick={(e) => signInFunc(e)} /*type="submit" label="Submit"/* onClick={()=>signInFunc()}*/>
                 sign-in
             </Button> 
             <Link to={"/signUp/"} id="linkTo">{'sign-up'} </Link>
+            
+            <Link to={"/SignInWithoutPassword"}>{'Forget password'}</Link>
         </Form>
 </>
 
