@@ -6,6 +6,8 @@ import { urlUsers } from '../data/url';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate  } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Stack from 'react-bootstrap/Stack';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 const url= urlUsers;
 
@@ -123,12 +125,18 @@ const SignUp = () => {
                 <Form.Control  id="PasswordUser" name="PasswordUser" type={passwordType} placeholder="Password" onChange={(e) => handleChange(e)} class="form-control-plaintex"/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <div class="col-11">
-                    <Form.Control  id="PasswordUser" name="PasswordUserAgain" type={passwordType} placeholder="Password" onChange={(e) => handlePassword(e)} class="form-control-plaintex"/>
-                </div>
-                <Button onClick={(e) => togglePassword(e)}>
-                    { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
-                </Button>
+                <InputGroup className="mb-3">
+                    {/* <div class="col-11"> */}
+                    <Form.Control
+                    placeholder="Password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon2"
+                    id="PasswordUser" name="PasswordUserAgain" type={passwordType} onChange={(e) => handlePassword(e)} class="form-control-plaintex"/>
+                    {/* </div> */}
+                    <Button variant="outline-secondary" id="button-addon2" onClick={(e) => togglePassword(e)}>
+                        { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
+                    </Button>
+                </InputGroup>
             </Form.Group>
             <Form.Group>
             {
@@ -136,12 +144,12 @@ const SignUp = () => {
                 <Form.Text> </Form.Text>
             }
             </Form.Group>
-
-            <Button onClick={(e) => signUp(e)}>
-                sign-up
-            </Button>
-            <Link to={"/signIn/"} id="linkTo">{'sign-in'} </Link>
-            
+            <Stack direction="horizontal" gap={3}>
+                <Button onClick={(e) => signUp(e)}>
+                    sign-up
+                </Button>
+                <Link className="ms-auto" to={"/signIn/"} id="linkTo">{'sign-in'} </Link>
+            </Stack>
         </Form>
         </div>
     )

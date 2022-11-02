@@ -5,8 +5,10 @@ import React, { useEffect } from "react";
 import SignUp from './SignUp'
 import { urlUsers } from '../data/url';
 import ReactDOM from 'react-dom';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Stack from 'react-bootstrap/Stack';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Card from 'react-bootstrap/Card';
 import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react'; 
@@ -103,35 +105,41 @@ const SignIn = () => {
                 <Form.Control name="LastName" type="text" placeholder="lastName" onChange={(e) => handleChange(e)}/>
             </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                
-                <div class="col-11">
-                    <Form.Control  id="PasswordUser" name="PasswordUser" type={passwordType} /*value={user.PasswordUser}*/ placeholder="Password" onChange={(e) => handleChange(e)} class="form-control-plaintex"/>
-                    </div>
-                        <Button /*className="btn btn-outline-primary"*/ onClick={(e) => togglePassword(e)}>
+                <InputGroup className="mb-3">
+                {/* <div class="col-11"> */}
+                    <Form.Control
+                    placeholder="Password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon2"
+                    id="PasswordUser" name="PasswordUser" type={passwordType} /*value={user.PasswordUser}*/ /*placeholder="Password"*/ onChange={(e) => handleChange(e)} class="form-control-plaintex"/>  
+                {/* </div> */}
+                <Button variant="outline-secondary" id="button-addon2"/*className="btn btn-outline-primary"*/ onClick={(e) => togglePassword(e)}>
                     { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
-                        </Button>
+                </Button>
+                </InputGroup>
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="show password" />
             </Form.Group> */}
-            <Form.Group>
-                {/* <Form.call func= "" label="Forget passwore" /> */}
+            {/* <Form.Group>
                 <Form.Text className="text-muted">
                 Forget passwore
                 </Form.Text>
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group>
                 {
                     inCorrectDetails?<Form.Text id="inCorrect">your name or your password in correct! try again</Form.Text>:
                     <Form.Text> </Form.Text>
                 }
             </Form.Group>
+            <Stack direction="horizontal" gap={3}>
             <Button onClick={(e) => signInFunc(e)} /*type="submit" label="Submit"/* onClick={()=>signInFunc()}*/>
                 sign-in
             </Button> 
-            <Link to={"/signUp/"} id="linkTo">{'sign-up'} </Link>
+            <Link className="ms-auto" to={"/signUp/"} id="linkTo">{'sign-up'} </Link>
             
             <Link to={"/SignInWithoutPassword"}>{'Forget password'}</Link>
+            </Stack>
         </Form>
 </>
 
