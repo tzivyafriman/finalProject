@@ -7,6 +7,7 @@ import AboutFood from './components/AboutFood';
 import { detailsFoodProvider } from './context/detailsFood';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
+import DetailsUserMeals from './components/DetailsUserMeals';
 import axios from 'axios';
 
 // import { Books } from './components/Books';
@@ -48,6 +49,7 @@ function App() {
           <Route path="/aboutFood" element={<AboutFood />} />
           <Route exact path="/SignUp" element={<SignUp />} />
           <Route exact path="/SignIn" element={<SignIn />} />
+          <Route exact path="/DetailsUserMeals" element={<DetailsUserMeals />} />
       </Routes>
    </detailsFoodProvider>
     //     </div>

@@ -104,7 +104,7 @@ const SignUp = () => {
         </head>
             <Form id="center">
             <Form.Group className="mb-3">
-                <Form.Control name="FirstName" type="text" placeholder="firstName" onChange={(e) => handleChange(e)}/>
+                <Form.Control name="FirstName" type="text" placeholder="FirstName" onChange={(e) => handleChange(e)}/>
             </Form.Group>
             <Form.Group>
             {
@@ -113,7 +113,7 @@ const SignUp = () => {
             }
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Control name="LastName" type="text" placeholder="lastName" onChange={(e) => handleChange(e)}/>
+                <Form.Control name="LastName" type="text" placeholder=" LastName" onChange={(e) => handleChange(e)}/>
             </Form.Group>
             <Form.Group>
             {
@@ -128,7 +128,7 @@ const SignUp = () => {
                 <InputGroup className="mb-3">
                     {/* <div class="col-11"> */}
                     <Form.Control
-                    placeholder="Password"
+                    placeholder="Your password again"
                     aria-label="Password"
                     aria-describedby="basic-addon2"
                     id="PasswordUser" name="PasswordUserAgain" type={passwordType} onChange={(e) => handlePassword(e)} class="form-control-plaintex"/>
@@ -148,7 +148,7 @@ const SignUp = () => {
                 <Button onClick={(e) => signUp(e)}>
                     sign-up
                 </Button>
-                <Link className="ms-auto" to={"/signIn/"} id="linkTo">{'sign-in'} </Link>
+                <Link className="ms-auto" to={"/signIn/"} id="linkTo">{'Sign-in'} </Link>
             </Stack>
         </Form>
         </div>

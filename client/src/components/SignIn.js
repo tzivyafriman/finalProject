@@ -96,13 +96,13 @@ const SignIn = () => {
         </head>
             <Form id="center">
             <Form.Group className="mb-3" /*controlId="formBasicEmail"*/>
-            <Form.Control name="FirstName" type="text" placeholder="firstName" onChange={(e) => handleChange(e)}/>
+            <Form.Control name="FirstName" type="text" placeholder="FirstName" onChange={(e) => handleChange(e)}/>
                 <Form.Text className="text-muted">
                     fullName or only firstName
                 </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" /*controlId="formBasicEmail"*/>
-                <Form.Control name="LastName" type="text" placeholder="lastName" onChange={(e) => handleChange(e)}/>
+                <Form.Control name="LastName" type="text" placeholder="LastName" onChange={(e) => handleChange(e)}/>
             </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                 <InputGroup className="mb-3">
@@ -136,7 +136,7 @@ const SignIn = () => {
             <Button onClick={(e) => signInFunc(e)} /*type="submit" label="Submit"/* onClick={()=>signInFunc()}*/>
                 sign-in
             </Button> 
-            <Link className="ms-auto" to={"/signUp/"} id="linkTo">{'sign-up'} </Link>
+            <Link className="ms-auto" to={"/signUp/"} id="linkTo">{'Sign-up'} </Link>
             
             <Link to={"/SignInWithoutPassword"}>{'Forget password'}</Link>
             </Stack>
