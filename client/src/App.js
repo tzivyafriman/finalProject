@@ -3,6 +3,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Routes, Route, Link } from "react-router-dom";
 import { ShowFood } from './components/ShowFood';
+import { RecipeReviewCard } from './components/card-delete';
 import AboutFood from './components/AboutFood';
 import { detailsFoodProvider } from './context/detailsFood';
 import SignUp from './components/SignUp';
@@ -41,17 +42,18 @@ function App() {
     //     </menu>
 
     //     <div>
-    
+
     //try git in client
     <detailsFoodProvider>
       <Routes>
-          <Route exact path="/" element={<ShowFood />} />
-          <Route path="/aboutFood" element={<AboutFood />} />
-          <Route exact path="/SignUp" element={<SignUp />} />
-          <Route exact path="/SignIn" element={<SignIn />} />
-          <Route exact path="/DetailsUserMeals" element={<DetailsUserMeals />} />
+        <Route exact path="/" element={<ShowFood />} />
+        <Route exact path="/card" element={<RecipeReviewCard />} />
+        <Route path="/aboutFood" element={<AboutFood />} />
+        <Route exact path="/SignUp" element={<SignUp />} />
+        <Route exact path="/SignIn" element={<SignIn />} />
+        <Route exact path="/DetailsUserMeals" element={<DetailsUserMeals />} />
       </Routes>
-   </detailsFoodProvider>
+    </detailsFoodProvider>
     //     </div>
     //   </div>
   );
