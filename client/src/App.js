@@ -3,6 +3,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Routes, Route, Link } from "react-router-dom";
 import { ShowFood } from './components/ShowFood';
+import { RecipeReviewCard } from './components/card-delete';
 import AboutFood from './components/AboutFood';
 import { detailsFoodProvider } from './context/detailsFood';
 import SignUp from './components/SignUp';
@@ -43,7 +44,7 @@ function App() {
     //     </menu>
 
     //     <div>
-    
+
     //try git in client
     <detailsFoodProvider>
       <Routes>
@@ -52,10 +53,8 @@ function App() {
           <Route exact path="/SignUp" element={<SignUp />} />
           <Route exact path="/SignIn" element={<SignIn />} />
           <Route exact path="/DetailsUserMeals" element={<DetailsUserMeals />} />
-          <Route exact path="/MealUserUpdate" element={<MealUserUpdate/>} />
-          <Route exact path="/TryMe" element={<Try />}  />
       </Routes>
-   </detailsFoodProvider>
+    </detailsFoodProvider>
     //     </div>
     //   </div>
   );
