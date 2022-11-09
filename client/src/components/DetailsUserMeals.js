@@ -3,7 +3,6 @@ import React from 'react';
 import Carousel from "react-multi-carousel";
 import Button from 'react-bootstrap/Button';
 import 'react-multi-carousel/lib/styles.css';
-
 const DetailsUserMeals =()=> 
 {
     const responsive = {
@@ -26,16 +25,17 @@ const DetailsUserMeals =()=>
         }
       };
 
-      const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
+    const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => 
+    {
         const { carouselState: { currentSlide } } = rest;
         return (
-          <div className="carousel-button-group"> // remember to give it position:absolute
-            <Button className={currentSlide === 0 ? 'disable' : ''} onClick={() => previous()} />
-            <Button onClick={() => next()} />
-            <Button onClick={() => goToSlide(currentSlide + 1)}> Go to any slide </Button>
-          </div>
+            <div className="carousel-button-group"> // remember to give it position:absolute
+                <Button className={currentSlide === 0 ? 'disable' : ''} onClick={() => previous()} />
+                <Button onClick={() => next()} />
+                <Button onClick={() => goToSlide(currentSlide + 1)}> Go to any slide </Button>
+            </div>
         );
-      };
+    };
 
 
     const d={
@@ -44,9 +44,10 @@ const DetailsUserMeals =()=>
     return(
         <> 
         <h1>hello</h1>
-        <Carousel  swipeable={false}
+        <Carousel  
+        swipeable={false}
         draggable={false}
-        showDots={true}
+        showDots={false}
         responsive={responsive}
         ssr={true} // means to render carousel on server-side.
         infinite={true}
@@ -59,7 +60,7 @@ const DetailsUserMeals =()=>
         removeArrowOnDeviceType={["tablet", "mobile"]}
   //      deviceType={this.props.deviceType}
         dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"  arrows={true} showDots={false}  customButtonGroup={<ButtonGroup />}>
+        itemClass="carousel-item-padding-40-px" arrows={true} customButtonGroup={<ButtonGroup />}>
             <div>Item 1</div>
             <div>Item 2</div>
             <div>Item 3</div>

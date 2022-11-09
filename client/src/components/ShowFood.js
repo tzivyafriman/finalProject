@@ -5,6 +5,9 @@ import AboutFood from './AboutFood';
 import Carousel from "react-multi-carousel";
 import Button from 'react-bootstrap/Button';
 import 'react-multi-carousel/lib/styles.css';
+import Stack from 'react-bootstrap/Stack';
+import { CarouselItem } from "react-bootstrap/CarouselItem";
+
 
 export const ShowFood = () => {
     const [currentFood, setCurrentFood] = useState("bread");
@@ -33,20 +36,32 @@ export const ShowFood = () => {
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
-          items: 1
-        }
+          items: 3
+        },
+        
       };
       
     const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
         const { carouselState: { currentSlide } } = rest;
         return (
-          <div className="carousel-button-group"> // remember to give it position:absolute
+          <div className="carousel-button-group"> 
+          {/* // remember to give it position:absolute */}
             <Button className={currentSlide === 0 ? 'disable' : ''} onClick={() => previous()} />
             <Button onClick={() => next()} />
             <Button onClick={() => goToSlide(currentSlide + 1)}> Go to any slide </Button>
           </div>
         );
     };
+
+    const CustomRightArrow = ({ onClick, ...rest }) => {
+        const {
+          onMove,
+          carouselState: { currentSlide, deviceType }
+        } = rest;
+        // onMove means if dragging or swiping in progress.
+        return <button onClick={() => onClick()} />;
+      };
+      
     const d={
         deviceType: "mobile",
     } 
@@ -55,10 +70,15 @@ export const ShowFood = () => {
     return (
         <>
             <h1>hello</h1>
-            <Carousel  
+
+            <Stack className="col-md-5 mx-auto" gap={3}>
+
+            <Carousel
+            // customRightArrow={<CustomRightArrow />}
+            carouselInternalState={5}
             swipeable={false}
             draggable={false}
-            showDots={true}
+            //showDots={true}
             responsive={responsive}
             ssr={true} // means to render carousel on server-side.
             infinite={true}
@@ -69,16 +89,27 @@ export const ShowFood = () => {
             transitionDuration={500}
             containerClass="carousel-container"
             removeArrowOnDeviceType={["tablet", "mobile"]}
-    //      deviceType={this.props.deviceType}
+            //deviceType={/*this.props.deviceType*/d.deviceType}
             dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px"  arrows={true} showDots={false}  customButtonGroup={<ButtonGroup />}>
+            itemClass='' arrows={true} showDots={false}  customButtonGroup={<ButtonGroup />}>
+            
+                {
+                    
+                    foodsList.map(f =>
+                        <>
+                            <div> {f.name}</div>
+                        </>
+                    )
+                }
+{/*             
                 <div>Item 1</div>
                 <div>Item 2</div>
-                <div>Item 3</div>
-                <div>Item 4</div>
-                <div>Item 5</div>
+                <div>Item 3</div> */}
+                {/* <div>Item 4</div>
+                <div>Item 5</div> */}
+                
             </Carousel>
-
+            </Stack>
             <div className="foodsDiv">
                 {/* <FoodContext.Provider value={currentFood}>
 

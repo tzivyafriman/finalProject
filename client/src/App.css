@@ -23,3 +23,47 @@ height: 80px;
   size: 15px;
   font-weight: bold;
 }
+#tr{
+  color:red;
+  size: 100px;
+  padding: 50vh;
+}
+#ballop{
+  padding: 20px;
+  /* color: aqua; */
+  background-color: antiquewhite;
+}
+#myId {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: red;
+  transition: 0.2s;
+}
+.box {
+  position: absolute;
+  cursor: move;
+  color: black;
+  max-width: 215px;
+  border-radius: 5px;
+  padding: 1em;
+  margin: auto;
+  user-select: none;
+}
+.droptarget {
+  float: left; 
+  width: 100px; 
+  height: 35px;
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+#droptarget {
+  float: left; 
+  width: 200px; 
+  height: 35px;
+  margin: 55px;
+  margin-top: 155px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}

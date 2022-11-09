@@ -8,6 +8,8 @@ import { detailsFoodProvider } from './context/detailsFood';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import DetailsUserMeals from './components/DetailsUserMeals';
+import MealUserUpdate from './components/MealUserUpdate';
+import Try from './components/TryMe';
 import axios from 'axios';
 
 // import { Books } from './components/Books';
@@ -50,6 +52,8 @@ function App() {
           <Route exact path="/SignUp" element={<SignUp />} />
           <Route exact path="/SignIn" element={<SignIn />} />
           <Route exact path="/DetailsUserMeals" element={<DetailsUserMeals />} />
+          <Route exact path="/MealUserUpdate" element={<MealUserUpdate/>} />
+          <Route exact path="/TryMe" element={<Try />}  />
       </Routes>
    </detailsFoodProvider>
     //     </div>
