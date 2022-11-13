@@ -53,6 +53,8 @@ function App() {
           <Route exact path="/SignUp" element={<SignUp />} />
           <Route exact path="/SignIn" element={<SignIn />} />
           <Route exact path="/DetailsUserMeals" element={<DetailsUserMeals />} />
+          <Route exact path="/MealUserUpdate" element={<MealUserUpdate />} />
+          <Route exact path="/Try" element={<Try />} />
       </Routes>
     </detailsFoodProvider>
     //     </div>
