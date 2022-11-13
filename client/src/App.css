@@ -15,6 +15,12 @@ height: 80px;
   padding-top: 5%;
 }
 
+#center2{
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 5%;
+}
 /* a, a:hover{
   color:#333
 } */
@@ -23,11 +29,11 @@ height: 80px;
   size: 15px;
   font-weight: bold;
 }
-#tr{
+/* #tr{
   color:red;
   size: 100px;
   padding: 50vh;
-}
+} */
 #ballop{
   padding: 20px;
   /* color: aqua; */
