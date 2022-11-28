@@ -5,12 +5,19 @@ import Table from 'react-bootstrap/Table';
 import Stack from 'react-bootstrap/Stack';
 import  { useEffect, useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Figure from 'react-bootstrap/Figure';
+import Container from 'react-bootstrap/Container';
+import foodsList from '../data/Foods';
 // import { Formik, Field, Form, ErrorMessage } from "formik";
 // import * as Yup from "yup";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { isPropertyAccessExpression } from "typescript";
+import picture from '../assets/images/c.jpg';
+declare module '*.jpg';
+declare module "*.png";
 
+  
 export const AddDish = (props: any) =>
 {
   const [food, setFood]=useState({
@@ -128,10 +135,37 @@ export const AddDish = (props: any) =>
         <head>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
         </head>
-        
+        <Stack direction="horizontal" gap={2}>
+        <Figure className="col-md-5 mx-auto">
+          <Figure.Caption>
+            <InputGroup className="mb-3">
+              <Form.Text> Name of product: </Form.Text>
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Text id="basic-addon1"><i className="bi bi-pencil-fill"></i></InputGroup.Text>
+              <Form.Control
+                name="NameFood"
+                placeholder="Name"
+                aria-label="Name"
+                aria-describedby="basic-addon1"
+                onChange={(e) => handleChange(e)}/>
+            </InputGroup>
+          </Figure.Caption>
+          <Figure.Image className="col-md-5 mx-auto"
+            roundedCircle={true}
+            // width={30}
+            // height={30}
+            // alt="30x30"
+            // fluid={true}
+            // thumbnail={true}
+            bsPrefix={"width: 30px"}
+            src={picture}
+          />
+        </Figure>
+        </Stack>
         <Form>
             <div id="center">
-            <InputGroup className="mb-3">
+            {/* <InputGroup className="mb-3">
             <InputGroup.Text id="basic-addon1"><i className="bi bi-card-image"></i></InputGroup.Text>
                 <Form.Control 
                 name="Picture"
@@ -151,7 +185,7 @@ export const AddDish = (props: any) =>
               aria-label="Name"
               aria-describedby="basic-addon1"
               onChange={(e) => handleChange(e)}/>
-            </InputGroup>
+            </InputGroup> */}
             <InputGroup className="mb-3">
             <Form.Text> Category of product: </Form.Text>
             </InputGroup>
@@ -340,8 +374,8 @@ export const AddDish = (props: any) =>
                 <Form.Text> </Form.Text>
             }
             </Form.Group> */}
-            <Stack direction="horizontal" gap={3}>
-                <Button onClick={(e) => addFood()}>
+            <Stack direction="horizontal" gap={1}>
+                <Button className="col-md-5 mx-auto" onClick={(e) => addFood()}>
                     save-me
                 </Button>
                 {/* <Link className="ms-auto" to={"/signIn/"} id="linkTo">{'Sign-in'} </Link> */}

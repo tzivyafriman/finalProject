@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from 'react';
+import { Stack } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
@@ -85,15 +86,10 @@ const MealUserUpdate = (props) =>{
       warpMeals.append(clone);
     })
   }
-    const z = document.createElement('Card');
-      // const elem = document.createElement('div');
-      // elem.appendChild(z);
-      // warpMeals.appendChild(elem);
- 
-
   
   return (
     <>
+    <config></config>
     <Form.Group className="mb-3">
         <Form.Control name="numOfMeals " type="number" placeholder="num of ypur meals" min="1" max="15" onChange={(e) => changeNumOfMeals(e)}/>
     </Form.Group>
@@ -121,14 +117,15 @@ const MealUserUpdate = (props) =>{
         </Card.Body>
       </Card>
     </div>
-
-    <div
+    <Stack direction="horizontal" gap={4}>
+    <div 
     onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget2"
     >
       <Card >
         <Card.Body >Carbohydrates</Card.Body>
       </Card>
     </div>
+    <div className="vr" />
     <div 
     onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget3"
     >
@@ -136,13 +133,15 @@ const MealUserUpdate = (props) =>{
         <Card.Body>Vegetables</Card.Body>
       </Card>
     </div>
-    <div
+    <div className="vr" />
+    <div 
     onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget4"
     >
       <Card>
         <Card.Body>Proteins</Card.Body>
       </Card>
     </div>
+    <div className="vr" />
     <div
     onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget5"
     >
@@ -150,6 +149,7 @@ const MealUserUpdate = (props) =>{
         <Card.Body>Fat</Card.Body>
       </Card>
     </div>
+    <div className="vr" />
     <div
     onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget"
     >
@@ -157,12 +157,14 @@ const MealUserUpdate = (props) =>{
         <Card.Body>Fruit</Card.Body>
       </Card>
     </div>
+    <div className="vr" />
     <div  draggable={true} onDrop={e => handleDrop(e)} onDragOver={e=>allowDrop(e)} >
        ertyuioooooooooooooooooooooooooooooooooooooooooooooooo
     </div>
     <div  onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget10">
       dfghjkl;'dfghjkl;'
     </div>
+    </Stack>
     </>
   )
  }
