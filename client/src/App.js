@@ -13,6 +13,7 @@ import MealUserUpdate from './components/MealUserUpdate';
 import { TryMe } from './components/TryMe';
 import axios from 'axios';
 import { AddDish } from './components/AddDish';
+import { UpdateNtritionalValuesUser } from './components/UpdateNutritionalValuesUser';
 import { render } from "react-dom";
 // import { Books } from './components/Books';
 // import { Book } from './components/Book';
@@ -56,6 +57,7 @@ function App() {
           <Route exact path="/DetailsUserMeals" element={<DetailsUserMeals />} />
           <Route exact path="/MealUserUpdate" element={<MealUserUpdate />} />
           <Route exact path="/AddDish" element={<AddDish />} />
+          <Route exact path="/UpdateNtritionalValuesUser" element={<UpdateNtritionalValuesUser />} />
           <Route exact path="/Try" element={<TryMe /> /*document.getElementById("root"))*/} />
       </Routes>
     </detailsFoodProvider>

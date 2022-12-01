@@ -1,20 +1,26 @@
 import * as React from 'react';
+// import {state} from 'react';
+import { EventTracker } from '@devexpress/dx-react-chart';
 import Paper from '@mui/material/Paper';
 import {
   BarSeries,
   Chart,
+  Tooltip,
   ArgumentAxis,
   ValueAxis,
   Legend,
   Title,
   PieSeries,
-} from '@devexpress/dx-react-chart-material-ui';
+} from '@devexpress/dx-react-chart-material-ui'
 // import { Stack} from '@devexpress/dx-react-chart';
 import { TypeOfExpression } from 'typescript';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/stack';
+import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
+import { SelectionState } from '@devexpress/dx-react-chart';
+import { NavLink } from 'react-bootstrap';
 
 const data = [
   { country: 'Russia', area: 12 },
@@ -30,25 +36,20 @@ const data = [
 const dataTypes = [ " ", 0];
 
 export const TryMe =()=> {
-  // constructor(props: {
-  //   country: string;
-  //   area: number;
-  //   }[]
-  // ) {
-  //   super(props);
-
-  //   this.state = {
-  //     data,
-  //   };
-  // }
-
-  // render() {
-    // const { data: chartData } = this.state;
 
     const [counter, setCounter] = useState(1);
+
+    const [current, setCurrent] = useState('');
+    const [countOfCategories, setCountOfCategories] = useState(0);
+    const [categoriesArea, setCategoriesArea]=useState({
+      Carbohydrates: 0,
+      Vegetables: 0,
+      Proteins: 0,
+      Fat: 0,
+      Fruit: 0
+    });
     
     const dragStart = (e: React.DragEvent<HTMLDivElement>) => {
-
       console.log("start");
       const basicElem = document.getElementById((e.target as HTMLDivElement)?.id);
       console.log(basicElem as HTMLElement);
@@ -61,18 +62,20 @@ export const TryMe =()=> {
       basicElem?.after(e.target as HTMLDivElement);
       e.dataTransfer.setData("Text", (e.target as HTMLDivElement).id);
       console.log('text= '+e.dataTransfer.getData("Text"));
+      // setChartData({...chartData},{chartData});
     }
     
     const dragEnd = (e: React.DragEvent<HTMLDivElement>) => {
       console.log("end");
       let idElement = (e.target as HTMLDivElement).id;
       e.dataTransfer.setData("another", (e.target as HTMLDivElement).id);
+      handleChangeCategoriesArea(e);
     }
 
     const allowDrop = (e: React.DragEvent<HTMLDivElement>) =>{
       console.log("allow");
       e.preventDefault();
-      (e.target as HTMLDivElement).style.border = "4px dotted green";
+      //(e.target as HTMLDivElement).style.border = "4px dotted green";
     }
 
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -84,72 +87,166 @@ export const TryMe =()=> {
       {
         (e.target as HTMLDivElement).appendChild(document.getElementById(data) as HTMLDivElement);
       }
+      // handleChangeCategoriesArea(e);
     };
 
     const chartData = [
       { categories: 
         <div 
-        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget2"
+        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="Carbohydrates"
         >
-          <Card style={{ backgroundColor: 'green' }} >
+          <Card /*style={{ backgroundColor: 'green' }}*/ >
             <Card.Body >Carbohydrates</Card.Body>
           </Card>
-        </div>, area: 50 },
+        </div>, area: categoriesArea.Carbohydrates },
       { categories: 
         <div 
-        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget3"
+        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="Vegetables"
         >
           <Card>
             <Card.Body>Vegetables</Card.Body>
           </Card>
-        </div>, area: 50 },
+        </div>, area: categoriesArea.Vegetables },
       { categories: 
         <div 
-        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget4"
+        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="Proteins"
         >
           <Card>
             <Card.Body>Proteins</Card.Body>
           </Card>
-        </div>, area: 7 },
+        </div>, area: categoriesArea.Proteins },
       { categories: 
         <div
-        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget5"
+        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="Fat"
         >
           <Card>
             <Card.Body>Fat</Card.Body>
           </Card>
-        </div>, area: 7 },
+        </div>, area: categoriesArea.Fat },
       { categories: 
         <div
-        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="dragtarget"
+        onDragStart={e=>dragStart(e)} onDragEnd={e=>dragEnd(e)} draggable="true" id="Fruit"
         >
           <Card>
             <Card.Body>Fruit</Card.Body>
           </Card>
-        </div>, area: 6 },
-      // { country: 'Australia', area: 5 },
-      // { country: 'India', area: 2 },
-      // { country: 'Others', area: 55 },
+        </div>, area: categoriesArea.Fruit },
     ];
+
+    const mytrydata = [
+      { year: '1950', population: 2.525 },
+      { year: '1960', population: 3.018 },
+      { year: '1970', population: 3.682 },
+      { year: '1980', population: 4.440 },
+      { year: '1990', population: 5.310 },
+      { year: '2000', population: 6.127 },
+      { year: '2010', population: 6.930 },
+    ];
+    const [helpCharData, setHelpCharData] = useState(chartData);
+
+    React.useEffect(() => {
+      // console.log('i useEffect');
+      // console.log("countOfCategories: "+countOfCategories);
+      // console.log("current: "+current);
+      setCategoriesArea({
+        ...categoriesArea,
+        ["Carbohydrates"]: (categoriesArea.Carbohydrates != 0) ? countOfCategories : 0,
+        ["Proteins"]: (categoriesArea.Proteins != 0) ? countOfCategories : 0,
+        ["Vegetables"]: (categoriesArea.Vegetables != 0) ? countOfCategories : 0,
+        ["Fat"]: (categoriesArea.Fat != 0) ? countOfCategories : 0,
+        ["Fruit"]: (categoriesArea.Fruit != 0) ? countOfCategories : 0,
+        [current]: countOfCategories,
+      });
+      
+    }, [countOfCategories, current]);
+
+    const handleChangeCategoriesArea = /*async*/(e: React.DragEvent<HTMLDivElement>) => 
+    {
+      //its work by useeffect, i think it had to work with async await function. but its not work me
+      /*await*/ setCountOfCategories((countOfCategories!=0) ? 100/(100/countOfCategories+1) : 100);
+      setCurrent((e.target as HTMLDivElement).id);
+    };
+
     const stacks = [
       { series: ['👶 Young', '🧑 Adult', '🧓 Old'] },
     ];
 
     return (
       <>
-      <Stack gap={2}/*style={{ textAlign : 'center'}}*/ style={{paddingLeft: '250px'}}>
-      <div draggable={true} onDrop={e => handleDrop(e)} onDragOver={e=>allowDrop(e)}>
-        <Card id="divCard" border="primary" style={{ width: '18rem' }}>
-            <Card.Header>Meal1</Card.Header>
-            <Card.Body>
-              <Card.Title>Primary Card Title</Card.Title>
-              <Card.Text >
-                grab on me to add categories on your mael
-              </Card.Text>
-            </Card.Body>
-          </Card>
+      <Stack direction="horizontal" gap={3}/*style={{ textAlign : 'center'}} style={{paddingLeft: '250px'}}*/>
+      {/* navigate */}
+      <div >
+      <Chart width={200} height={200} 
+          data={helpCharData}
+        >
+          <PieSeries
+            valueField="area"
+            argumentField="categories"
+          />
+          <Stack /*id="center"*/>
+            <Legend />
+          </Stack>
+      </Chart>
       </div>
-      <div draggable={true} onDrop={e => handleDrop(e)} onDragOver={e=>allowDrop(e)}>
+
+      {/* <Form.Group className="mb-3">
+        <Card.Text>how much meals do you eat in day? </Card.Text>
+        <Form.Control name="numOfMeals " type="number" placeholder="num of ypur meals" min="1" max="15" onChange={(e) => changeNumOfMeals(e)}/>
+      </Form.Group> */}
+
+      <div /*className="bg-light border"*/ >
+        <Card id="divCard" /*border="primary"*/ style={{ width: '18rem' }}>
+          <Card.Header>
+            <Form.Group className="mb-3" /*controlId="formBasicEmail"*/>
+                <Form.Control name="MealName" type="text" placeholder="MealName" /*onChange={(e) => handleChange(e)}*//>
+            </Form.Group></Card.Header>
+          <Card.Body>
+            <Card.Text  style={{backgroundColor: '#9c9a9a4f'}} draggable={true} onDrop={(e: React.DragEvent<HTMLDivElement>) => handleDrop(e)} onDragOver={(e: React.DragEvent<HTMLDivElement>)=>allowDrop(e)}>
+              grab on me to add categories on your mael
+            </Card.Text>
+            <div /*draggable={true} onDrop={e => handleDrop(e)} onDragOver={e=>allowDrop(e)}*/>
+            <Chart width={200} height={200} rotated={true}  
+              data={chartData}
+            >
+              <PieSeries
+                valueField="area"
+                argumentField="categories"
+              />
+              <EventTracker />
+              <Tooltip />
+            </Chart>
+            </div>
+          </Card.Body>
+        </Card>
+      </div>
+
+      <div /*className="bg-light border"*/ >
+        <Card id="divCard" /*border="primary"*/ style={{ width: '18rem' }}>
+          <Card.Header>
+            <Form.Group className="mb-3" /*controlId="formBasicEmail"*/>
+                <Form.Control name="MealName" type="text" placeholder="MealName" /*onChange={(e) => handleChange(e)}*//>
+            </Form.Group></Card.Header>
+          <Card.Body>
+            <Card.Text  style={{backgroundColor: '#9c9a9a4f'}} draggable={true} onDrop={(e: React.DragEvent<HTMLDivElement>) => handleDrop(e)} onDragOver={(e: React.DragEvent<HTMLDivElement>)=>allowDrop(e)}>
+              grab on me to add categories on your mael
+            </Card.Text>
+            <div /*draggable={true} onDrop={e => handleDrop(e)} onDragOver={e=>allowDrop(e)}*/>
+            <Chart width={200} height={200} rotated={true}  
+              data={chartData}
+            >
+              <PieSeries
+                valueField="area"
+                argumentField="categories"
+              />
+              <EventTracker />
+              <Tooltip />
+            </Chart>
+            </div>
+          </Card.Body>
+        </Card>
+      </div>
+
+      <div className="bg-light border" draggable={true} onDrop={e => handleDrop(e)} onDragOver={e=>allowDrop(e)}>
         <Card id="divCard" border="primary" style={{ width: '18rem' }}>
             <Card.Header>Meal2</Card.Header>
             <Card.Body>
@@ -160,24 +257,13 @@ export const TryMe =()=> {
             </Card.Body>
           </Card>
       </div>
-      </Stack>
-      //navigate
-      <Paper >
-        <Chart width={200} height={200} 
-          data={chartData}
-        >
-          <PieSeries
-            valueField="area"
-            argumentField="categories"
-          />
-          
-          <Stack id="center">
-            <Legend />
-          </Stack>
-        </Chart>
-      </Paper>
 
-      <div style={{paddingLeft: '250px'}} draggable={true} onDrop={e => handleDrop(e)} onDragOver={e=>allowDrop(e)}>
+      {/* <Paper > */}
+        
+      </Stack>
+      {/* </Paper> */}
+
+      {/* <div style={{paddingLeft: '250px'}} draggable={true} onDrop={e => handleDrop(e)} onDragOver={e=>allowDrop(e)}>
       <Chart width={200} height={200} rotated={true}  
           data={chartData}
       >
@@ -186,7 +272,7 @@ export const TryMe =()=> {
           argumentField="categories"
         />
       </Chart>
-      </div>
+      </div> */}
       </>
     );
   // }
@@ -266,3 +352,31 @@ export const TryMe =()=> {
 
 
 // export default TryMe;
+
+
+  // constructor(props: {
+  //   country: string;
+  //   area: number;
+  //   }[]
+  // ) {
+  //   super(props);
+
+  //   this.state = {
+  //     data,
+  //   };
+  // }
+
+  // render() {
+    // const { data: chartData } = this.state;
+
+    // <div>
+    //   <Chart width={200} height={200} 
+    //       data={mytrydata}
+    //     >
+    //       <PieSeries
+    //         valueField="population"
+    //         argumentField="year"
+    //       />
+    //       <EventTracker />
+    //       <Tooltip />
+    //   </Chart></div>
