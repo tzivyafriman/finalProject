@@ -12,21 +12,21 @@ declare module "*.png";
   
 export const UpdateNtritionalValuesUser = () =>
 {
-  const [food, setFood]=useState({
-    "NameFood": " ",
-    "Category": "",
-    "Picture": ""
-  })
+  // const [food, setFood]=useState({
+  //   "NameFood": " ",
+  //   "Category": "",
+  //   "Picture": ""
+  // })
 
-  const [nutritionalValuesFor100g, setNutritionalValuesFor100g]=useState({
-    Calories: 0,
-    Proteins: 0,
-    Carbohydrates: 0,
-    SaturatedFat: 0,
-    TransFat : 0,
-    Cholesterol: 0,
-    DietaryFiber: 0,
-    Sugars: 0
+  const [nutritionalValuesForMaxOrMin, setNutritionalValuesForMaxOrMin]=useState({
+    Calories: true,
+    Proteins: true,
+    Carbohydrates: true,
+    SaturatedFat: true,
+    TransFat : true,
+    Cholesterol: true,
+    DietaryFiber: true,
+    Sugars: true
   })
   const [nutritionalValues, setNutritionalValues]=useState({
     Calories: 0,
@@ -38,62 +38,85 @@ export const UpdateNtritionalValuesUser = () =>
     DietaryFiber: 0,
     Sugars: 0
   });
-  const [PersonalGr, setPersonalGr] = useState(0);
-
-  const handleChange = (event: {target: { name: string; value: string; }; } | undefined) => {
-    const nameOfProp = event?.target.name;
-    const value = event?.target.value;
-        let f=food;
-        if(nameOfProp === 'NameFood' && typeof(value) === 'string')
-        {
-          f.NameFood = value;
-        }
-        if(nameOfProp === 'group1' && typeof(value) === 'string')
-        {
-          f.Category = value;
-        }
-        if(nameOfProp === 'Picture' && typeof(value) === 'string')
-        {
-          f.Picture = value;
-        }
-        setFood(f);
-        console.log(nameOfProp+ " "+value);
-        console.log(food);
+  const [PersonalTime, setPersonalTime] = useState('daily');
+  const [allUpdate, setAllUpdate] = useState(true);
+  // const handleChange = (event: {target: { name: string; value: string; }; } | undefined) => {
+  //   const nameOfProp = event?.target.name;
+  //   const value = event?.target.value;
+  //       let f=food;
+  //       if(nameOfProp === 'NameFood' && typeof(value) === 'string')
+  //       {
+  //         f.NameFood = value;
+  //       }
+  //       if(nameOfProp === 'group1' && typeof(value) === 'string')
+  //       {
+  //         f.Category = value;
+  //       }
+  //       if(nameOfProp === 'Picture' && typeof(value) === 'string')
+  //       {
+  //         f.Picture = value;
+  //       }
+  //       setFood(f);
+  //       console.log(nameOfProp+ " "+value);
+  //       console.log(food);
         
         
-  };
+  // };
 
-  const handleChangeCategory = (event: {target: { name: string; value: string; }; } | undefined, label: string | undefined) => 
+  const handlePersonalTime = (e: {target: { name: string; value: string; }; } | undefined, label: string | undefined) => 
   {
     console.log(label);
-    let f=food;
-    f.Category = label? label: '';
-    setFood(f);
-    console.log(food);
+    setPersonalTime(label? label: 'daily')
   };
 
-  const handleChangeNutritionalValuesFor100G = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => 
+  const handleChangeNutritionalValuesForMaxOrMin = (e: React.ChangeEvent<HTMLSelectElement>) => 
   {
-    setNutritionalValuesFor100g({
-      ...nutritionalValuesFor100g,
-      [e.target.name]: e.target.value.trim(),
+    setNutritionalValuesForMaxOrMin({
+      ...nutritionalValuesForMaxOrMin,
+      [e.target.name]:  (e.target.value.toString() === "Maximum") ? true : false
     });
-    setNutritionalValues({
-      ...nutritionalValues,
-      [e.target.name]: Number(e.target.value)/100*PersonalGr,
-    })
-    console.log("hai: " +nutritionalValuesFor100g.Calories);
+    console.log("hai: " +nutritionalValuesForMaxOrMin.Calories);
   };
+
+  const changeAllNutritionalValuesForMaxOrMin = () => 
+  {
+    if(allUpdate === true)
+    {
+      // setAllUpdate(!allUpdate);
+      setNutritionalValuesForMaxOrMin({
+        ["Calories"] : false,
+        ["Carbohydrates"] : false,
+        ["Cholesterol"] : false,
+        ["DietaryFiber"] : false,
+        ["Proteins"] : false,
+        ["SaturatedFat"] : false,
+        ["Sugars"] : false,
+        ["TransFat"] : false,
+      });
+      // console.log("allupdates: " + allUpdate + "nutritionalValuesForMaxOrMin.calories: "+nutritionalValuesForMaxOrMin.Calories);
+      
+    }else
+    {
+      // setAllUpdate(!allUpdate);
+      setNutritionalValuesForMaxOrMin({
+        ["Calories"] : true,
+        ["Carbohydrates"] : true,
+        ["Cholesterol"] : true,
+        ["DietaryFiber"] : true,
+        ["Proteins"] : true,
+        ["SaturatedFat"] : true,
+        ["Sugars"] : true,
+        ["TransFat"] : true,
+      });
+      console.log("allupdates: " + allUpdate + "nutritionalValuesForMaxOrMin.calories: "+nutritionalValuesForMaxOrMin.Calories);
+    }
+  }
 
   const handleChangeNutritionalValues = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => 
   {
     setNutritionalValues({
       ...nutritionalValues,
       [e.target.name]: e.target.value.trim(),
-    });
-    setNutritionalValuesFor100g({
-      ...nutritionalValuesFor100g,
-      [e.target.name]: Number(e.target.value)/PersonalGr*100,
     })
   };
 
@@ -107,29 +130,6 @@ export const UpdateNtritionalValuesUser = () =>
         <head>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
         </head>
-        {/* <Stack direction="horizontal" gap={2}>
-        <Figure className="col-md-5 mx-auto">
-          <Figure.Caption>
-            <InputGroup className="mb-3">
-              <Form.Text> Name of product: </Form.Text>
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="basic-addon1"><i className="bi bi-pencil-fill"></i></InputGroup.Text>
-              <Form.Control
-                name="NameFood"
-                placeholder="Name"
-                aria-label="Name"
-                aria-describedby="basic-addon1"
-                onChange={(e) => handleChange(e)}/>
-            </InputGroup>
-          </Figure.Caption>
-          <Figure.Image className="col-md-5 mx-auto"
-            roundedCircle={true}
-            bsPrefix={"width: 30px"}
-            src={picture}
-          />
-        </Figure>
-        </Stack> */}
         <Form>
             <div id="center">
             <InputGroup className="mb-3">
@@ -142,21 +142,21 @@ export const UpdateNtritionalValuesUser = () =>
                 label="daily"
                 name="group1"
                 type='radio'
-                onChange={(e) => handleChangeCategory(e, 'daily')}
+                onChange={(e) => handlePersonalTime(e, 'daily')}
               />
               <Form.Check
                 inline
                 label="weekly"
                 name="group1"
                 type='radio'
-                onChange={(e) => handleChangeCategory(e, 'weekly')}
+                onChange={(e) => handlePersonalTime(e, 'weekly')}
               />
               <Form.Check
                 inline
                 label="monthly"
                 name="group1"
                 type='radio'
-                onChange={(e) => handleChangeCategory(e, 'monthly')}
+                onChange={(e) => handlePersonalTime(e, 'monthly')}
               />
             </div>
             </div>
@@ -181,50 +181,50 @@ export const UpdateNtritionalValuesUser = () =>
                   <td>quentity</td>
                   <td>
                   <InputGroup >
-                    <Form.Control name="Calories" placeholder={nutritionalValuesFor100g.Calories.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e) => handleChangeNutritionalValuesFor100G(e)}/>
+                    <Form.Control name="Calories" placeholder={nutritionalValues.Calories.toString()} type="number" min="0" aria-label="Text input with dropdown button" 
+                    onChange={(e) => handleChangeNutritionalValues(e)}/>
                   </InputGroup>
                   </td>
                   <td>
                   <InputGroup >
-                    <Form.Control name="Proteins" placeholder={nutritionalValuesFor100g.Proteins.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e) => handleChangeNutritionalValuesFor100G(e)}/>
+                    <Form.Control name="Proteins" placeholder={nutritionalValues.Proteins.toString()} type="number" min="0"  aria-label="Text input with dropdown button" 
+                    onChange={(e) => handleChangeNutritionalValues(e)}/>
                   </InputGroup>
                   </td>
                   <td>
                   <InputGroup >
-                    <Form.Control name="Carbohydrates" placeholder={nutritionalValuesFor100g.Carbohydrates.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e) => handleChangeNutritionalValuesFor100G(e)}/>
+                    <Form.Control name="Carbohydrates" placeholder={nutritionalValues.Carbohydrates.toString()} type="number" min="0" aria-label="Text input with dropdown button" 
+                    onChange={(e) => handleChangeNutritionalValues(e)}/>
                   </InputGroup>
                   </td>
                   <td>
                   <InputGroup >
-                    <Form.Control name="SaturatedFat" placeholder={nutritionalValuesFor100g.SaturatedFat.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e) => handleChangeNutritionalValuesFor100G(e)}/>
+                    <Form.Control name="SaturatedFat" placeholder={nutritionalValues.SaturatedFat.toString()} type="number" min="0" aria-label="Text input with dropdown button" 
+                    onChange={(e) => handleChangeNutritionalValues(e)}/>
                   </InputGroup>
                   </td>
                   <td>
                   <InputGroup >
-                    <Form.Control name="TransFat" placeholder={nutritionalValuesFor100g.TransFat.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e) => handleChangeNutritionalValuesFor100G(e)}/>
+                    <Form.Control name="TransFat" placeholder={nutritionalValues.TransFat.toString()} type="number" min="0" aria-label="Text input with dropdown button" 
+                    onChange={(e) => handleChangeNutritionalValues(e)}/>
                   </InputGroup>
                   </td>
                   <td>
                   <InputGroup >
-                    <Form.Control name="Cholesterol" placeholder={nutritionalValuesFor100g.Cholesterol.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e) => handleChangeNutritionalValuesFor100G(e)}/>
+                    <Form.Control name="Cholesterol" placeholder={nutritionalValues.Cholesterol.toString()} type="number" min="0" aria-label="Text input with dropdown button" 
+                    onChange={(e) => handleChangeNutritionalValues(e)}/>
                   </InputGroup>
                   </td>
                   <td>
                   <InputGroup >
-                    <Form.Control name="DietaryFiber" placeholder={nutritionalValuesFor100g.DietaryFiber.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e) => handleChangeNutritionalValuesFor100G(e)}/>
+                    <Form.Control name="DietaryFiber" placeholder={nutritionalValues.DietaryFiber.toString()} type="number" min="0" aria-label="Text input with dropdown button" 
+                    onChange={(e) => handleChangeNutritionalValues(e)}/>
                   </InputGroup>
                   </td>
                   <td>
                   <InputGroup >
-                    <Form.Control name="Sugars" placeholder={nutritionalValuesFor100g.Sugars.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e) => handleChangeNutritionalValuesFor100G(e)}/>
+                    <Form.Control name="Sugars" placeholder={nutritionalValues.Sugars.toString()} type="number" min="0" aria-label="Text input with dropdown button" 
+                    onChange={(e) => handleChangeNutritionalValues(e)}/>
                   </InputGroup>
                   </td>
                 </tr>
@@ -232,56 +232,67 @@ export const UpdateNtritionalValuesUser = () =>
                 <tr>
                 <td>max or min</td>
                   <td>
-                  <InputGroup >
-                    <Form.Control name="Calories" placeholder={nutritionalValues.Calories.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e)=>handleChangeNutritionalValues(e)} />
-                  </InputGroup>
+                  <Form.Select name="Calories"   
+                    onChange={(e)=>handleChangeNutritionalValuesForMaxOrMin(e)} aria-label="Default select example">
+                    <option value="1">Maximum</option>
+                    <option value="2">Minimum</option>
+                  </Form.Select>
                   </td>
                   <td>
-                  <InputGroup >
-                    <Form.Control name="Proteins" placeholder={nutritionalValues.Proteins.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button"
-                    onChange={(e)=>handleChangeNutritionalValues(e)} />
-                  </InputGroup>
+                  <Form.Select name="Proteins" placeholder={nutritionalValues.Proteins.toString()} 
+                    onChange={(e)=>handleChangeNutritionalValuesForMaxOrMin(e)} aria-label="Default select example">
+                    <option value="1">Maximum</option>
+                    <option value="2">Minimum</option>
+                  </Form.Select>
                   </td>
                   <td>
-                  <InputGroup >
-                    <Form.Control name="Carbohydrates" placeholder={nutritionalValues.Carbohydrates.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e)=>handleChangeNutritionalValues(e)}/>
-                  </InputGroup>
+                  <Form.Select name="Carbohydrates" placeholder={nutritionalValues.Carbohydrates.toString()}  
+                    onChange={(e)=>handleChangeNutritionalValuesForMaxOrMin(e)} aria-label="Default select example">
+                    <option value="1">Maximum</option>
+                    <option value="2">Minimum</option>
+                  </Form.Select>
                   </td>
                   <td>
-                  <InputGroup >
-                    <Form.Control name="SaturatedFat" placeholder={nutritionalValues.SaturatedFat.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e)=>handleChangeNutritionalValues(e)}/>
-                  </InputGroup>
+                  <Form.Select name="SaturatedFat" placeholder={nutritionalValues.SaturatedFat.toString()}  
+                    onChange={(e)=>handleChangeNutritionalValuesForMaxOrMin(e)} aria-label="Default select example">
+                    <option value="1">Maximum</option>
+                    <option value="2">Minimum</option>
+                  </Form.Select>
                   </td>
                   <td>
-                  <InputGroup >
-                    <Form.Control name="TransFat" placeholder={nutritionalValues.TransFat.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e)=>handleChangeNutritionalValues(e)}/>
-                  </InputGroup>
+                  <Form.Select name="TransFat" placeholder={nutritionalValues.TransFat.toString()}  
+                    onChange={(e)=>handleChangeNutritionalValuesForMaxOrMin(e)} aria-label="Default select example">
+                    <option value="1">Maximum</option>
+                    <option value="2">Minimum</option>
+                  </Form.Select>
                   </td>
                   <td>
-                  <InputGroup >
-                    <Form.Control name="Cholesterol" placeholder={nutritionalValues.Cholesterol.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e)=>handleChangeNutritionalValues(e)}/>
-                  </InputGroup>
+                  <Form.Select name="Cholesterol" placeholder={nutritionalValues.Cholesterol.toString()}  
+                    onChange={(e)=>handleChangeNutritionalValuesForMaxOrMin(e)} aria-label="Default select example">
+                    <option value="1">Maximum</option>
+                    <option value="2">Minimum</option>
+                  </Form.Select>
                   </td>
                   <td>
-                  <InputGroup >
-                    <Form.Control name="DietaryFiber" placeholder={nutritionalValues.DietaryFiber.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button"
-                    onChange={(e)=>handleChangeNutritionalValues(e)} />
-                  </InputGroup>
+                  <Form.Select name="DietaryFiber" placeholder={nutritionalValues.DietaryFiber.toString()}  
+                    onChange={(e)=>handleChangeNutritionalValuesForMaxOrMin(e)} aria-label="Default select example">
+                    <option value="1">Maximum</option>
+                    <option value="2">Minimum</option>
+                  </Form.Select>
                   </td>
                   <td>
-                  <InputGroup >
-                    <Form.Control name="Sugars" placeholder={nutritionalValues.Sugars.toString()} type="number" min="0" max="1500" aria-label="Text input with dropdown button" 
-                    onChange={(e)=>handleChangeNutritionalValues(e)}/>
-                  </InputGroup>
+                  <Form.Select name="Sugars" placeholder={nutritionalValues.Sugars.toString()}  
+                    onChange={(e)=>handleChangeNutritionalValuesForMaxOrMin(e)} aria-label="Default select example">
+                    <option value="1">Maximum</option>
+                    <option value="2">Minimum</option>
+                  </Form.Select>
                   </td>
+                  
                 </tr>
               </tbody>
             </Table>
+            {/* //why button update all the component ?
+            <Button onClick={() => changeAllNutritionalValuesForMaxOrMin()} type="submit">All</Button> */}
             </div>
             
             <Stack direction="horizontal" gap={1}>
@@ -295,7 +306,10 @@ export const UpdateNtritionalValuesUser = () =>
         </div>
        </>
     )
-
-    
+  
 }
+
+
+
+
 

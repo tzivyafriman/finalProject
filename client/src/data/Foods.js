@@ -21,7 +21,7 @@ const foodsList =
         picture:"../assets/b.jpg"
     },
     {
-        name:"chese",
+        name:"cheese",
         Calories:100,
         fat:50,
         Sugar:20,
@@ -42,6 +42,36 @@ const foodsList =
     },
     {
         name:"banana",
+        Calories:100,
+        fat:50,
+        Sugar:20,
+        sodium:5,
+        Proteins:5,
+        type:"carbohydrate",
+        picture:"../assets/b.jpg"
+    },
+    {
+        name:"onion",
+        Calories:100,
+        fat:50,
+        Sugar:20,
+        sodium:5,
+        Proteins:5,
+        type:"carbohydrate",
+        picture:"../assets/b.jpg"
+    },
+    {
+        name:"poteyow",
+        Calories:100,
+        fat:50,
+        Sugar:20,
+        sodium:5,
+        Proteins:5,
+        type:"carbohydrate",
+        picture:"../assets/b.jpg"
+    },
+    {
+        name:"tometow",
         Calories:100,
         fat:50,
         Sugar:20,
