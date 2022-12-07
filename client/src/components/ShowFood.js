@@ -5,9 +5,7 @@ import AboutFood from './AboutFood';
 import Carousel from "react-multi-carousel";
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
-import 'react-multi-carousel/lib/styles.css';
-// import React, { useState } from 'react';
-// import Button from 'react-bootstrap/Button';
+// import 'react-multi-carousel/lib/styles.css';
 import Modal from 'react-bootstrap/Modal';
 // card
 import * as React from 'react';
@@ -23,18 +21,15 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import styled from "@emotion/styled";
-import { color } from "@mui/system";
-
-
-// 
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
+import Delete from '@mui/icons-material/Delete'; 
 
 export const ShowFood = () => {
   // modal
-   const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -90,10 +85,40 @@ export const ShowFood = () => {
     setExpanded(!expanded);
   };
 
+  const theme = useTheme();
+
+  
+  const [mealFoods, setMealFoods] = React.useState([]);
+  // const mealFoods=[1,1,1];
+  const count = 0;
+
+  const addToMeal = (e) =>
+  {
+    console.log("e: "+e.name);
+    if(mealFoods.indexOf(e) === -1)
+    {
+      setMealFoods(mealFoods => [...mealFoods, e])
+    }else
+    {
+      alert("this food exists already")
+    }
+    
+  }
+
+  const deleteFromMeal = (f) =>
+  {
+    setMealFoods(mealFoods.filter( mf  => 
+    { 
+      //update by id or filed that not be equal to 2 items
+      return mf.name !== f.name
+    }));
+  }
+
+
   return (
     <>
-      <h1>hello</h1>
-      <Stack gap={1}>
+      <h1>hello | Nav place </h1>
+      <Stack direction="horizontal" gap={3}>
         <div id="leftSide">
           <Carousel 
             swipeable={false}
@@ -119,9 +144,9 @@ export const ShowFood = () => {
                     <CardHeader sx={{ maxHeight: 40}}
                       avatar={
                       <>
-                        <Avatar sx={{ maxWidth: 30 , maxHeight: 30, /*bgcolor: red[500]*/}} aria-label="recipe">
+                        <Avatar sx={{ maxWidth: 30 , maxHeight: 30, /*bgcolor: red[500]*/}} /*aria-label="recipe"*/>
                           {/* R */}
-                          <IconButton sx={{ maxWidth: 30 , maxHeight: 30}} aria-label="recipe"
+                          <IconButton sx={{ maxWidth: 30 , maxHeight: 30}} /*aria-label="recipe"*/
                           aria-label="settings"
                           onClick={handleShow}>
                           <MoreVertIcon />
@@ -129,7 +154,7 @@ export const ShowFood = () => {
                         </Avatar>
                         <Avatar sx={{/* maxWidth: 30 , maxHeight: 30, bgcolor: red[500]*/}} aria-label="recipe">
                         {/* R */}
-                        <IconButton aria-label="add to favorites">
+                        <IconButton aria-label="add to favorites" onClick={() => addToMeal(f)}>
                           <FavoriteIcon />
                         </IconButton>
                         </Avatar>
@@ -151,7 +176,8 @@ export const ShowFood = () => {
                       // אורך
                       height="100"
                       width="30"
-                      image="https://m.media-amazon.com/images/I/71Zo1BD2k5L._AC_UL480_FMwebp_QL65_.jpg"
+                      image={f.picture}
+                      //"https://m.media-amazon.com/images/I/71Zo1BD2k5L._AC_UL480_FMwebp_QL65_.jpg"
                       // image="https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"
                       // alt="Paella dish"
                     />
@@ -249,7 +275,8 @@ export const ShowFood = () => {
                         </IconButton>
                         </Avatar>
                         <Avatar sx={{maxWidth: 30 , maxHeight: 30, bgcolor: red[500]}}>
-                        <IconButton aria-label="add to favorites">
+                          {console.log("f: "+f.name)}
+                        <IconButton aria-label="add to favorites" onClick={() => addToMeal(f)}>
                           <FavoriteIcon />
                         </IconButton>
                         </Avatar>
@@ -261,14 +288,50 @@ export const ShowFood = () => {
                       component="img"
                       height="100"
                       width="30"
-                      image={f.image}
+                      image={f.picture }
                     />
                   </Card>
                 </>)
             }
           </Carousel>
         </div>
+        <div className="vr" />
+        <div class="opositeDirection">
+        <h3>my meal</h3>
+        <div class="scroll" style={{ height: '70vh' }}>
+        {
+          mealFoods.map(f =>
+            <>
+            <Card sx={{ display: 'flex' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <CardContent sx={{ flex: '1 0 auto' }}>
+                  <Typography sx={{ width: 170 }} component="div" variant="h5">
+                    {f.name}
+                  </Typography>
+                  <Typography variant="subtitle1" color="text.secondary" component="div">
+                    2 picece
+                  </Typography>
+                </CardContent>
+                <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+                <Avatar sx={{ maxWidth: 30 , maxHeight: 30}}>
+                  <IconButton aria-label="delete" size="lg" onClick={ () => deleteFromMeal(f)}><Delete/></IconButton></Avatar>
+                </Box>
+              </Box>
+              <CardMedia
+                component="img"
+                sx={{ width: 100 }}
+                image={f.picture}
+                alt="Live from space album cover"
+              />
+            </Card>
+            <div><br></br></div>
+            </>)
+        }
+        </div>
+        </div>
+        
       </Stack>
+      {/* </Stack> */}
       <Button variant="primary" onClick={handleShow}>
         Launch static backdrop modal
       </Button>

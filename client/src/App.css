@@ -75,4 +75,11 @@ height: 80px;
 }
 #leftSide{
   width: 70%;
+  /* display: inline-block; */
 }
+div.scroll
+{
+  overflow-y:auto;
+  white-space: nowrap;
+}
+
