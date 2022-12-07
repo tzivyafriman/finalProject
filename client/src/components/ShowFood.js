@@ -33,7 +33,7 @@ export const ShowFood = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [currentFood, setCurrentFood] = useState("bread");
+  const [currentFood, setCurrentFood] = useState({});
   // const FoodContext = createContext();
 
   const [showAbouteFoodModal, setShowAbouteFoodModal] = useState(false);
@@ -92,17 +92,16 @@ export const ShowFood = () => {
   // const mealFoods=[1,1,1];
   const count = 0;
 
-  const addToMeal = (e) =>
+  const addToMeal = (f) =>
   {
-    console.log("e: "+e.name);
-    if(mealFoods.indexOf(e) === -1)
+    console.log("e: "+f.name);
+    if(mealFoods.indexOf(f) === -1)
     {
-      setMealFoods(mealFoods => [...mealFoods, e])
+      setMealFoods(mealFoods => [...mealFoods, f])
     }else
     {
       alert("this food exists already")
     }
-    
   }
 
   const deleteFromMeal = (f) =>
@@ -114,6 +113,11 @@ export const ShowFood = () => {
     }));
   }
 
+  const setCurrentFoodAndSetShow = (f) => 
+  {
+    setCurrentFood(f);
+    handleShow();
+  }
 
   return (
     <>
@@ -148,7 +152,7 @@ export const ShowFood = () => {
                           {/* R */}
                           <IconButton sx={{ maxWidth: 30 , maxHeight: 30}} /*aria-label="recipe"*/
                           aria-label="settings"
-                          onClick={handleShow}>
+                          onClick={() => setCurrentFoodAndSetShow(f)}>
                           <MoreVertIcon />
                         </IconButton>
                         </Avatar>
@@ -270,7 +274,7 @@ export const ShowFood = () => {
                         <Avatar sx={{ maxWidth: 30 , maxHeight: 30, /*bgcolor: red[500]*/}}>
                           <IconButton sx={{ maxWidth: 30 , maxHeight: 30}} 
                           aria-label="settings"
-                          onClick={handleShow}>
+                          onClick={() => setCurrentFoodAndSetShow(f)}>
                           <MoreVertIcon />
                         </IconButton>
                         </Avatar>
@@ -343,10 +347,17 @@ export const ShowFood = () => {
         keyboard={false}
       >
         <Modal.Header closeButton>
+          {/*I think' Ido it!!*/ }
           {/* ע"מ שנוכל לשים פה את שם המאכל וכו, צריך לשים את המודל בתוך ה foreach  , מה שמגוחך בעיני וכן מחשיך את המסך מתחת מאוד!! */}
-          <Modal.Title>Modal title</Modal.Title>
+          <Modal.Title>{currentFood.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          Calories:         {currentFood.Calories},{<br />}
+          fat:              {currentFood.fat},{<br />}
+          Sugar:            {currentFood.Sugar},{<br />}
+          sodium:           {currentFood.sodium},{<br />}
+          Proteins:         {currentFood.Proteins},{<br />}
+          type:             {currentFood.type},{<br />}
           I will not close if you click outside me. Don't even try to press
           escape key.
         </Modal.Body>
@@ -354,6 +365,7 @@ export const ShowFood = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+          <Button variant="secondary" /*onClick={move to update component with this currentFood}*/>Update</Button>
           <Button variant="primary">Understood</Button>
         </Modal.Footer>
       </Modal>
